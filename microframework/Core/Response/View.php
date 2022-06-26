@@ -9,9 +9,10 @@ class View extends Response
         parent::__construct(statusCode: $statusCode, contentType: $contentType, charset: $charset);
     }
 
-    public function render(mixed ...$args)
+    public function render(?array &$args = null, bool $extract = true)
     {
-        extract($args);
+        if ($extract)
+            extract($args);
         include_once $_ENV["VIEW_PATH"] . $this->view;
         return 0;
     }

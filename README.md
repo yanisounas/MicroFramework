@@ -47,7 +47,6 @@ Next you need to create a new controller in app/Controller. I'll call mine "Home
 
 Put this following code:
 ```php
-
 namespace App\Controller;
 
 use MicroFramework\Core\Response\Response;
@@ -130,3 +129,84 @@ class HomeController extends Controller
 }
 ```
 
+Passing arguments to your View
+------------------------------
+You can pass arguments to your view in your controller:
+
+```php
+namespace App\Controller;
+
+use MicroFramework\Core\AbstractClass\Controller;
+use MicroFramework\Core\Router\Attributes\Route;
+
+class HomeController extends Controller
+{
+    #[Route("/")]
+    public function home()
+    {
+        return $this->view("home.php", ["foo", "bar"]);
+    }
+}
+```
+
+Then go to your home.php:
+```php
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <ul>
+            <?php foreach ($args as $arg): ?>
+                <li><?= $arg ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </body>
+</html>
+```
+
+Passing associative array to your view
+-------------------------------------
+You can also use an associative array:
+```php
+namespace App\Controller;
+
+use MicroFramework\Core\AbstractClass\Controller;
+use MicroFramework\Core\Router\Attributes\Route;
+
+class HomeController extends Controller
+{
+    #[Route("/")]
+    public function home()
+    {
+        return $this->view("home.php", ["id" => 1, "username" => "Foo"]);
+    }
+}
+```
+
+home.php:
+```php
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+            </tr>
+            <tr>
+                <td><?= $args["id"] ?></td>
+                <td><?= $args["username"] ?></td>
+            </tr>
+        </table>
+    </body>
+</html>
+```
