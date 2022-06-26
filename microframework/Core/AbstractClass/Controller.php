@@ -8,6 +8,6 @@ abstract class Controller
 {
     public function view(string $path, mixed ...$args)
     {
-        return (new View($path))->render(...$args[0]);
+        return (new View($path))->render(args:(empty($args)) ? null : $args[0]);
     }
 }
