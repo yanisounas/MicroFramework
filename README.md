@@ -10,7 +10,7 @@ Usage/Examples
 File Architecture
 -----------------
 
-First thing first you have to create your app folder: 
+First things first you need to create your app folder: 
 
     .
     ├── app                              
