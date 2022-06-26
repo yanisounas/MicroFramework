@@ -14,7 +14,7 @@ I just started it, and I'm not an experienced developer, this code is not perfec
     - [Passing arguments to your View](#passing-arguments-to-your-view)
     - [Passing associative array to your view](#passing-associative-array-to-your-view)
 - [404 Error and more response features](#404-error-and-more-response-features)
-  - [Intro to 404](#404-page-in-json-why-not)
+  - [Intro to 404](#intro-to-404)
   - [Use Controller](#404-page-with-controller)
 
 First Usage
@@ -246,8 +246,11 @@ Use your keys as variable names:
 
 404 Error and more response features
 ====================================
-404 Page in JSON (why not)
---------------------------------
+Intro to 404
+-------------
+I'll show you how to make your first 404 in JSON 
+
+
 The easiest way to do this is the RouteNotFound exception.
 
 Go back to your index.php:
