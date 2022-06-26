@@ -4,6 +4,19 @@ A Micro Framework in PHP 8.
 
 I just started it, and I'm not an experienced developer, this code is not perfect. So this framework is not intended to be used other than locally.
 
+## Summary
+
+- [First Usage](#first-usage)
+  - [File Architecture](#file-architecture)
+  - [Make your own Controller](#controllers)
+  - [Create your first Web Application](#webapp)
+  - [Use your View](#views)
+    - [Passing arguments to your View](#passing-arguments-to-your-view)
+    - [Passing associative array to your view](#passing-associative-array-to-your-view)
+- [404 Error and more response features](#404-error-and-more-response-features)
+  - [Intro to 404](#404-page-in-json-why-not)
+  - [Use Controller](#404-page-with-controller)
+
 First Usage
 ==================
 
