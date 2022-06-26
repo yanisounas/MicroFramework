@@ -38,7 +38,9 @@ See the .env.exemple to create your own .env.
 
 Controllers
 ------------
-Next you need to create a new controller in app/Controller. I'll call mine "HomeController".
+Next you need to create a new controller in app/Controller.
+
+I'll call mine "HomeController":
 
     .
     ├── app                         
