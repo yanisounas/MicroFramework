@@ -2,7 +2,7 @@
 # MicroFramework
 A Micro Framework in PHP 8.
 
-I just started it, and I'm not an experienced developer, this code is not perfect. So this framework is not intended to be used other than locally.
+I just started it, and I'm not an experienced developer,  I am doing this project to improve my skills. So this framework is not intended to be used other than locally.
 
 ## Summary
 
