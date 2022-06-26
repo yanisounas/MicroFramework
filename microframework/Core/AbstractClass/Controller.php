@@ -6,8 +6,8 @@ use MicroFramework\Core\Response\View;
 
 abstract class Controller
 {
-    public function view(string $path, array $args = null, bool $extract = true)
+    public function view(string $path, int $statusCode = null, ?array $args = null, bool $extract = true)
     {
-        return (new View($path))->render($args, $extract);
+        return (new View($path, $statusCode))->render($args, $extract);
     }
 }

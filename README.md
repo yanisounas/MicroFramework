@@ -4,13 +4,13 @@ A Micro Framework in PHP 8.
 
 I just started it, and I'm not an experienced developer, this code is not perfect. So this framework is not intended to be used other than locally.
 
-Usage/Examples
+First Usage
 ==================
 
 File Architecture
 -----------------
 
-First things first you need to create your app folder: 
+First things first you need to create your app folder:
 
     .
     ├── app                              
@@ -20,14 +20,8 @@ First things first you need to create your app folder:
     ├── .env
     ├── .env.exemple
     ├── ...
-    
-
-
-
 
 See the .env.exemple to create your own .env.
-
-
 
 Controllers
 ------------
@@ -44,8 +38,8 @@ Next you need to create a new controller in app/Controller. I'll call mine "Home
     ├── .env.exemple
     ├── ...
 
-
 Put this following code:
+
 ```php
 namespace App\Controller;
 
@@ -62,10 +56,9 @@ class HomeController
 }
 
 ```
-
 WebApp
 ------
-Finally you can create a new WebApp in index.php:
+Finally, you can create a new WebApp in index.php:
 
 ```php
 require "vendor/autoload.php";
@@ -77,12 +70,11 @@ $app->start();
 
 Go to your favorite browser and try it.
 
-
 Views
 ------
 To create a view, make sure your .env file contains `VIEW_PATH="app/View"`.
-
-Then create a view in app/View
+\
+Then create a view in app/View:
 
     .
     ├── app                         
@@ -97,9 +89,8 @@ Then create a view in app/View
     ├── .env.exemple
     ├── ...
 
-
 home.php:
-```php
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +104,7 @@ home.php:
 ```
 
 Then go to your HomeController and change some code:
+
 ```php
 namespace App\Controller;
 
@@ -150,6 +142,7 @@ class HomeController extends Controller
 ```
 
 Then go to your home.php:
+
 ```php
 <!DOCTYPE html>
 <html lang="en">
@@ -171,6 +164,7 @@ Then go to your home.php:
 Passing associative array to your view
 -------------------------------------
 You can also use an associative array:
+
 ```php
 namespace App\Controller;
 
@@ -188,7 +182,8 @@ class HomeController extends Controller
 ```
 
 home.php:
-```php
+
+```html
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -210,3 +205,132 @@ home.php:
     </body>
 </html>
 ```
+
+Use your keys as variable names:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+            </tr>
+            <tr>
+                <td><?= $id ?></td>
+                <td><?= $username ?></td>
+            </tr>
+        </table>
+    </body>
+</html>
+```
+
+404 Error and more response features
+====================================
+404 Page in JSON (why not)
+--------------------------------
+The easiest way to do this is the RouteNotFound exception.
+
+Go back to your index.php:
+
+```php
+require "vendor/autoload.php";
+
+
+$app = new \MicroFramework\WebApp(__DIR__, \App\Controller\HomeController::class);
+
+try 
+{
+    $app->start();
+}
+catch (\MicroFramework\Core\Router\Exceptions\RouteNotFound $e)
+{
+    echo "404";
+}
+```
+
+Now use JsonReponse to return our 404 error:
+
+```php
+require "vendor/autoload.php";
+
+
+$app = new \MicroFramework\WebApp(__DIR__, \App\Controller\HomeController::class);
+
+try 
+{
+    $app->start();
+}
+catch (\MicroFramework\Core\Router\Exceptions\RouteNotFound $e)
+{
+    return new \MicroFramework\Core\Response\JsonResponse(["error" => "404 Not Found"]);
+}
+```
+
+Finally, change the status code:
+
+```php
+require "vendor/autoload.php";
+
+
+$app = new \MicroFramework\WebApp(__DIR__, \App\Controller\HomeController::class);
+
+try 
+{
+    $app->start();
+}
+catch (\MicroFramework\Core\Router\Exceptions\RouteNotFound $e)
+{
+    return new \MicroFramework\Core\Response\JsonResponse(["error" => "404 Not Found"], 404);
+}
+```
+
+404 Page with controller
+------------------------
+A better way would be to use controller to manage your 404
+
+For now, I'll use the HomeController: 
+
+```php
+namespace App\Controller;
+
+use MicroFramework\Core\AbstractClass\Controller;
+use MicroFramework\Core\Router\Attributes\Route;
+
+class HomeController extends Controller
+{
+    #[Route("/")]
+    public function home()
+    {
+        return $this->view("home.php");
+    }
+
+    #[Route("/404")]
+    public function notFound()
+    {
+        return $this->view("404.php", 404);
+    }
+}
+```
+
+Create the 404.php in your view Directory:
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>404 not found</title>
+    </head>
+    <body>
+        <h1>404 Not Found</h1>
+    </body>
+</html>
+```
+
+Finally, make sure your .env file contains `ERROR_404="./404"`

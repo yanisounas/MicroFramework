@@ -86,8 +86,9 @@ class Router
             if ($route[0]->match($this->url))
                 return call_user_func_array([new $route[1][0](), $route[1][1]], $route[0]->getMatches());
         }
-
-        throw new RouteNotFound("Route $this->url not found");
+        if (!isset($_ENV["ERROR_404"]))
+            throw new RouteNotFound("Route $this->url not found");
+        header("Location: ".$_ENV["ERROR_404"]);
     }
 
     /**

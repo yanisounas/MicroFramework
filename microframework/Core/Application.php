@@ -12,7 +12,7 @@ class Application
         $this->controllers = $constrollers;
     }
 
-    public function loadEnv()
+    public function loadEnv(): Application
     {
         $dotenv = \Dotenv\Dotenv::createImmutable($this->envDir);
         $dotenv->load();
@@ -20,7 +20,13 @@ class Application
 
     }
 
-    public function listenRoutes()
+    /**
+     * @throws Router\Exceptions\RouteNameAlreadyDeclared
+     * @throws Router\Exceptions\MethodNotSupported
+     * @throws \ReflectionException
+     * @throws Router\Exceptions\RouteNotFound
+     */
+    public function listenRoutes(): Application
     {
         $router = new \MicroFramework\Core\Router\Router((empty($_GET["route"])) ? "/" : $_GET["route"]);
         $router->getRouteFromController(...$this->controllers);
@@ -30,7 +36,7 @@ class Application
     }
 
 
-    public function start()
+    public function start(): Application
     {
         $this->loadEnv()->listenRoutes();
         return $this;
