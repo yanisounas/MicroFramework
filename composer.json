@@ -1,6 +1,6 @@
 {
     "name": "yo/microframework",
-    "description": "A little Micro Framework in PHP 8",
+    "description": "A Micro Framework in PHP 8",
     "autoload": {
         "psr-4": {
             "MicroFramework\\": "microframework/",
