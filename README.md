@@ -361,3 +361,4 @@ Upcoming features:
 - Complete README.md
 - Template Engine
 - Refactoring Application system
+- Support for http errors
