@@ -7,12 +7,7 @@
             "App\\": "app/"
         }
     },
-    "authors": [
-        {
-            "name": "",
-            "email": ""
-        }
-    ],
+    "authors": [],
     "require": {
         "vlucas/phpdotenv": "^5.4",
         "ext-pdo": "*"

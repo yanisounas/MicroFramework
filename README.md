@@ -356,3 +356,8 @@ Finally, make sure your .env file contains `ERROR_404="./404"`
 
 To be continued...
 ==================
+Upcoming features:
+
+- Complete README.md
+- Template Engine
+- Refactoring Application system
